@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="websitesModule">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Global @ Project Trial</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+<script src="js/angular.min.js"></script>
+<script src="js/dirPagination.js"></script>
+<script src="controller/websites.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body ng-controller="websitesController">
+
+<div class="container">
+	<h1>Global @ Project Trial</h1>
+    <h4>Websites and design ideas</h4>
+	<form>
+    	<div class="form-group row">
+      		<label for="Title" class="col-sm-2 col-form-label">Title*</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="title" required class="form-control" id="TextTitle" id="title">
+        	</div>
+    	</div>
+    
+		<div class="form-group row">
+      		<label for="Body" required class="col-sm-2 col-form-label">Body*</label>
+      		<div class="col-sm-10">
+        		<input type="text" ng-model="body" class="form-control" id="body" id="body" maxlength="1000">
+      		</div>
+    	</div>
+ 
+ 		<div class="form-group row">
+      		<label for="Category" required class="col-sm-2 col-form-label"  id="category">Category*</label>
+      		<div class="col-sm-10">
+     	  		<select  ng-model="category" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+  			  		<option value="Lifestyle">Lifestyle</option>
+    		  		<option value="Travel">Travel</option>
+    		  		<option value="Video">Video</option>
+  				</select>
+			  </div>
+			  
+    	</div>
+    
+ 
+    	<div class="form-group row">
+      		<label for="Subjetc" class="col-sm-2 col-form-label">Subjetc URL</label>
+      			<div class="col-sm-10">
+         			<input type="url" ng-model="subjecturl" class="form-control" id="subjecturl">
+      			</div>
+    	</div>
+ 
+    	<div class="form-group row">
+      		<div class="offset-sm-2 col-sm-10">
+        		<button ng-disabled="!title || !body || !category" type="submit" ng-click="ButtonClick()" class="btn btn-primary">Submit new post</button>
+      		</div>
+		</div>
+		<p>*Required fields</p>
+	</form>
+	
+	<div class="alert alert-info" role="alert" ng-if="message">
+		{{message}}
+	  </div>
+	  <div class="alert alert-danger" role="alert" ng-if="failedmessage">
+		{{failedmessage}}
+	  </div>
+
+
+  	<hr />
+  
+	  <h4>Websites and design ideas</h4>
+    
+    <div dir-paginate="websiteValue in websites | itemsPerPage: 3" class="container border border-info" style="margin-bottom:20px;">
+      <h3>Post title: {{websiteValue.title}}</h3>
+      <p class="font-weight-normal">Category: {{websiteValue.category}}</p>
+	  <p class="font-weight-normal" ng-if="websiteValue.subjecturl">
+		<iframe ng-src="{{trustSrc(websiteValue.subjecturl)}}" width="70%" height="420px"></iframe>
+      </p>
+	  <p class="font-weight-normal">{{websiteValue.body}}</p>
+	  <hr />
+  </div>
+
+  <dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+
+</div>
+
+</body>
+
+</html>
