@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express()
 
 app.use(cors());
-app.use(bodyParser.json());   
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
 });
 
 app.get('/website', function(req, res) {
-  
+
   connection.query('SELECT * from tbnewwebsite order by id desc', function (error, results) {
   		if (error) {
 			console.error(error);
@@ -28,9 +28,9 @@ app.get('/website', function(req, res) {
         } else
             res.send(results);
 	});
-	
+
 })
-    
+
 
 app.post('/website', function(req, res) {
   //const title = req.body.title,
@@ -44,7 +44,7 @@ app.post('/website', function(req, res) {
   }
   console.log(data)
     // Insert
-    
+
     const query = 'INSERT INTO tbnewwebsite set ?';
 	connection.query(query, data, function (error) {
   		if (error) {
@@ -52,10 +52,10 @@ app.post('/website', function(req, res) {
 			res.status(500).send('Request failed.')
 		} else
             res.send("Ok")
-		
+
 	});
-	
-    
+
+
 })
 
-app.listen(3000, () => console.log('App listening on port 3000!'))
+app.listen(8080, () => console.log('App listening on port 8080!'))
