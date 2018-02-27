@@ -58,4 +58,10 @@ app.post('/website', function(req, res) {
 
 })
 
-app.listen(8080, () => console.log('App listening on port 8080!'))
+//app.listen(8080, () => console.log('App listening on port 8080!'))
+// Start the server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+  console.log('Press Ctrl+C to quit.');
+});
